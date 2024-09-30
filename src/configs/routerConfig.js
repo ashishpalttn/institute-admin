@@ -4,6 +4,8 @@ import DashboardPage from '../pages/Dashboard/DashboardPage';
 import  EventRegisterPage  from '../pages/EventRegisterPage';
 import DashboardData from '../pages/Dashboard';
 import LiveEvents from '../pages/LiveEvents';
+import ParticepantsList from '../pages/ParticepantsList';
+
 
 // import './index.css';
 
@@ -16,6 +18,7 @@ const RouteConfig = () => {
                     <Route path="/dashboard/overview" element={<DashboardData/>} />
                     <Route path="/events/register" element={<EventRegisterPage/>} />
                     <Route path="/live-events" element={<LiveEvents />} />
+                    <Route path="/particepants" element={<ParticepantsList />} />
                 </Route>
                 <Route path="/dashboard" element={<DashboardPage />} />
                 
