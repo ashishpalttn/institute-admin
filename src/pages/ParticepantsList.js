@@ -19,7 +19,9 @@ const StudentsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/participant-list/${eventName}`);
+        const response = await axios.get(`${BASE_URL}/participant-list/${eventName}`,
+          {withCredentials:true}
+        );
         setStudents(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);

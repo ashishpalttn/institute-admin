@@ -1,6 +1,10 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement, incrementByAmount } from '../store/counterSlice';
 
 const DashboardData = () => {
+    const count = useSelector((state) => state.counter.value);
+    const dispatch = useDispatch();
     return (
         <div className="p-12">
             <h2 className="text-2xl font-semibold mb-4">Dashboard</h2>
@@ -20,6 +24,14 @@ const DashboardData = () => {
                 <div className="bg-white shadow rounded-lg p-4">
                     <h3 className="text-lg font-medium">New Admissions</h3>
                     <p className="text-2xl font-semibold">340</p>
+                </div>
+                <div>
+                    <h1>Count: {count}</h1>
+                    <button onClick={() => dispatch(increment())}>Increment</button>
+                    <button onClick={() => dispatch(decrement())}>Decrement</button>
+                    <button onClick={() => dispatch(incrementByAmount(5))}>
+                        Increment by 5
+                    </button>
                 </div>
             </div>
         </div>
