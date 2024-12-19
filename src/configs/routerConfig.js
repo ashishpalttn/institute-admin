@@ -6,6 +6,7 @@ import DashboardData from '../pages/Dashboard';
 import LiveEvents from '../pages/LiveEvents';
 import ParticepantsList from '../pages/ParticepantsList';
 import ProtectedRoute from './ProtectedRoute';
+import StudentAdmissionPage from '../pages/StudentAdmission';
 
 
 // import './index.css';
@@ -20,6 +21,7 @@ const RouteConfig = () => {
                     <Route path="/events/register" element={<EventRegisterPage/>} />
                     <Route path="/live-events" element={< ProtectedRoute><LiveEvents /></ProtectedRoute> } />
                     <Route path="/particepants" element={<ParticepantsList />} />
+                    <Route path='/students/admissions' element={<StudentAdmissionPage/>}/>
                 </Route>
                 <Route path="/dashboard" element={<DashboardPage />} />
                 
