@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const GenericTable = ({ columns, data, onEdit, onDelete }) => {
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   const handleSort = (column) => {
-    let direction = 'asc';
-    if (sortConfig.key === column && sortConfig.direction === 'asc') {
-      direction = 'desc';
+    let direction = "asc";
+    if (sortConfig.key === column && sortConfig.direction === "asc") {
+      direction = "desc";
     }
     setSortConfig({ key: column, direction });
   };
@@ -17,10 +17,10 @@ const GenericTable = ({ columns, data, onEdit, onDelete }) => {
     if (sortConfig.key) {
       return [...data].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'asc' ? -1 : 1;
+          return sortConfig.direction === "asc" ? -1 : 1;
         }
         if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'asc' ? 1 : -1;
+          return sortConfig.direction === "asc" ? 1 : -1;
         }
         return 0;
       });
@@ -29,25 +29,25 @@ const GenericTable = ({ columns, data, onEdit, onDelete }) => {
   }, [data, sortConfig]);
 
   if (!data || data.length === 0) {
-    return <p className="text-center p-4">No students registered for this event.</p>;
+    return (
+      <p className="text-center p-4">No students registered for this event.</p>
+    );
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+    <div className="overflow-auto" style={{ width: "100%", height: "100%" }}>
+      <table className=" divide-gray-200 w-full">
+        <thead className="bg-gray-200">
           <tr>
             {columns.map((column, index) => (
               <th
                 key={index}
                 className="px-6 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider cursor-pointer"
-                onClick={() => handleSort(column.field)}
+                onClick={() => handleSort(column.fieldKey)}
               >
-                {column.header}
-                {sortConfig.key === column.field && (
-                  <span>
-                    {sortConfig.direction === 'asc' ? ' ▲' : ' ▼'}
-                  </span>
+                {column.fieldName}
+                {sortConfig.key === column.fieldKey && (
+                  <span>{sortConfig.direction === "asc" ? " ▲" : " ▼"}</span>
                 )}
               </th>
             ))}
@@ -60,8 +60,11 @@ const GenericTable = ({ columns, data, onEdit, onDelete }) => {
           {sortedData.map((item, index) => (
             <tr key={index}>
               {columns.map((column, idx) => (
-                <td key={idx} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {column.field === 'sn' ? index + 1 : item[column.field]}
+                <td
+                  key={idx}
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                >
+                  {column.fieldKey === "sn" ? index + 1 : item[column.fieldKey]}
                 </td>
               ))}
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -73,7 +76,7 @@ const GenericTable = ({ columns, data, onEdit, onDelete }) => {
                 </button>
                 <button
                   className="text-red-500 hover:text-red-700"
-                  onClick={() => onDelete(item)}
+                  onClick={() => onDelete(item.id)}
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
@@ -84,6 +87,9 @@ const GenericTable = ({ columns, data, onEdit, onDelete }) => {
       </table>
     </div>
   );
+  
+  
+  
 };
 
 export default GenericTable;

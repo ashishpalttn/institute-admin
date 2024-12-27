@@ -1,5 +1,5 @@
 import axios from 'axios';
-import CustomButtonWrapper from './CustomButtonWrapper';
+import GenericButton from './GenericButton';
 const BASE_URL = `${process.env.REACT_APP_API_URL}/event-registration`
 
 export const ExportStudents = ({ eventName }) => {
@@ -24,7 +24,7 @@ export const ExportStudents = ({ eventName }) => {
 
   return (
     <div>
-      <CustomButtonWrapper
+      <GenericButton
       onClick={() => downloadExcel(eventName)}
       label={"Export Students"}
       />

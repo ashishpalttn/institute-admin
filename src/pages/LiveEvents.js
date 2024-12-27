@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 const LiveEvents = () => {
-  // const [events, setEvents] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {events, loading} = useSelector((state)=>state.liveEvent)
@@ -20,34 +18,6 @@ const LiveEvents = () => {
 
   const BASE_URL = `${process.env.REACT_APP_API_URL}/api/events`
 
-  // useEffect(() => {
-  //   const fetchEvents = async () => {
-  //     try {
-  //       const response = await axios.get(BASE_URL);
-  //       setEvents(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching events:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchEvents();
-  // }, []);
-
-
-  // const handleOnDelete = async (event)=>{
-  //   const isConfirmed = window.confirm(`Are you sure you want to delete the event "${event.eventName}"?`);
-  //   if(isConfirmed){
-  //   try{
-  //   const responce = await axios.delete(`${BASE_URL}/${event.id}`);
-  //   setEvents(prevEvents => prevEvents.filter(e => e.id !== event.id));
-  //   }
-  //   catch(error){
-  //     console.log(error);
-  //   }
-  //   }
-  // }
   const handleDelete = (event) =>{
     dispatch(deleteEvent(event.id))
   }

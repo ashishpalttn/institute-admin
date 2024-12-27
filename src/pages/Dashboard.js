@@ -26,12 +26,12 @@ const DashboardData = () => {
                     <p className="text-2xl font-semibold">340</p>
                 </div>
                 <div>
-                    <h1>Count: {count}</h1>
+                    {/* <h1>Count: {count}</h1>
                     <button onClick={() => dispatch(increment())}>Increment</button>
                     <button onClick={() => dispatch(decrement())}>Decrement</button>
                     <button onClick={() => dispatch(incrementByAmount(5))}>
                         Increment by 5
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>

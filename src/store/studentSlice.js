@@ -1,10 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import { buildQueries } from '@testing-library/react';
 import axios from 'axios';
 
-// const BASE_URL = 'https://dummyjson.com/products'
-
-const BASE_URL = `${process.env.REACT_APP_API_URL}/secure/student/get-all`
+const BASE_URL = `${process.env.REACT_APP_API_URL}/secure/student/student`
 
 
 export const getStudents = createAsyncThunk('student', async ()=>{
@@ -13,14 +10,27 @@ export const getStudents = createAsyncThunk('student', async ()=>{
         return response.data
         
     }catch(error){
-
+        console.log("Error during fetch students", error)
     }
 
 })
 
-export const saveStudent = createAsyncThunk()
+export const saveStudent = createAsyncThunk("student", async (student)=>{
+    try{
+        const response = await axios.post(BASE_URL,student)
+    }catch(error){
+        console.log("Error during student save",error)
+    }
+})
 
-export const deleteStudent = createAsyncThunk()
+export const deleteStudent = createAsyncThunk("student", async (id)=>{
+    try{
+        await axios.delete(`${BASE_URL}/${id}`)
+    }catch(error){
+        console.log("Error during delete student",error);
+    }
+})
+
 
 const studentSlice = createSlice({
     name:'student',

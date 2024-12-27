@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomButtonWrapper = ({
+const GenericButton = ({
   onClick,
   label,
   disabled = false,
@@ -22,11 +22,11 @@ const CustomButtonWrapper = ({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      className={`px-4 py-2 font-bold rounded-3xl ${buttonVariants[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`px-6 py-2 items-center flex font-bold rounded-3xl ${buttonVariants[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       {label}
     </button>
   );
 };
 
-export default CustomButtonWrapper;
+export default GenericButton;

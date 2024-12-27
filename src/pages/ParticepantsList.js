@@ -33,18 +33,6 @@ const StudentsList = () => {
     fetchData();
   }, []);
 
-  const columns = [
-    { header: 'id', field: 'id', hideEdit:true },
-    { header: 'SN.', field: 'sn', hideEdit:true },
-    { header: 'Student Name', field: 'studentName' },
-    { header: 'Class', field: 'studentClass' },
-    { header: 'Mobile No', field: 'mobileNo' },
-    { header: 'Email', field: 'email' },
-    { header: 'Guardian Name', field: 'guardianName' },
-    { header: 'Event', field: 'eventName' },
-    { header: 'Institute', field: 'instituteName', hideEdit:true },
-  ];
-
   const handleEdit = (student) => {
       setSelectedStudent(student);  // Set selected student for editing
       setEditDialogOpen(true);      // Open dialog
@@ -105,3 +93,16 @@ const StudentsList = () => {
 };
 
 export default StudentsList;
+
+
+const columns = [
+  { fieldName: 'id', fieldKey: 'id', hideEdit:true },
+  { fieldName: 'SN.', fieldKey: 'sn', hideEdit:true },
+  { fieldName: 'Student Name', fieldKey: 'studentName' },
+  { fieldName: 'Class', fieldKey: 'studentClass' },
+  { fieldName: 'Mobile No', fieldKey: 'mobileNo' },
+  { fieldName: 'Email', fieldKey: 'email' },
+  { fieldName: 'Guardian Name', fieldKey: 'guardianName' },
+  { fieldName: 'Event', fieldKey: 'eventName' },
+  { fieldName: 'Institute', fieldKey: 'instituteName', hideEdit:true },
+];
