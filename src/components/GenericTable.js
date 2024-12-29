@@ -1,95 +1,69 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import { IconButton } from "@mui/material";
+import { Edit, Delete } from "@mui/icons-material";
 
 const GenericTable = ({ columns, data, onEdit, onDelete }) => {
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-
-  const handleSort = (column) => {
-    let direction = "asc";
-    if (sortConfig.key === column && sortConfig.direction === "asc") {
-      direction = "desc";
-    }
-    setSortConfig({ key: column, direction });
-  };
-
-  const sortedData = React.useMemo(() => {
-    if (sortConfig.key) {
-      return [...data].sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "asc" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "asc" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return data;
-  }, [data, sortConfig]);
-
-  if (!data || data.length === 0) {
-    return (
-      <p className="text-center p-4">No students registered for this event.</p>
-    );
-  }
+  const enhancedColumns = [
+    {
+      field: "serialNo",
+      headerName: "SN",
+      sortable: false,
+      minWidth: 80,
+      flex: 0.2, // Adjust as needed to balance space
+      renderCell: (params) => {
+        const serialNumber = data.indexOf(params.row)+1
+        return <div>{serialNumber}</div> 
+      }
+      ,
+    },
+    ...columns.map((col) => ({
+      field: col.fieldKey,
+      headerName: col.fieldName,
+      flex: 1,
+      sortable: true,
+      minWidth: 150,
+    })),
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      minWidth: 120,
+      flex: 0.5,
+      renderCell: (params) => (
+        <div className="flex space-x-2">
+          <IconButton
+            className="text-blue-500 hover:text-blue-700"
+            onClick={() => onEdit(params.row)}
+          >
+            <Edit />
+          </IconButton>
+          <IconButton
+            className="text-red-500 hover:text-red-700"
+            onClick={() => onDelete(params.row.id)}
+          >
+            <Delete />
+          </IconButton>
+        </div>
+      ),
+    },
+  ];
 
   return (
-    <div className="overflow-auto" style={{ width: "100%", height: "100%" }}>
-      <table className=" divide-gray-200 w-full">
-        <thead className="bg-gray-200">
-          <tr>
-            {columns.map((column, index) => (
-              <th
-                key={index}
-                className="px-6 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider cursor-pointer"
-                onClick={() => handleSort(column.fieldKey)}
-              >
-                {column.fieldName}
-                {sortConfig.key === column.fieldKey && (
-                  <span>{sortConfig.direction === "asc" ? " ▲" : " ▼"}</span>
-                )}
-              </th>
-            ))}
-            <th className="px-6 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {sortedData.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column, idx) => (
-                <td
-                  key={idx}
-                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                >
-                  {column.fieldKey === "sn" ? index + 1 : item[column.fieldKey]}
-                </td>
-              ))}
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                <button
-                  className="text-blue-500 hover:text-blue-700 mr-4"
-                  onClick={() => onEdit(item)}
-                >
-                  <FontAwesomeIcon icon={faEdit} />
-                </button>
-                <button
-                  className="text-red-500 hover:text-red-700"
-                  onClick={() => onDelete(item.id)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="w-full h-full max-h-[80vh] overflow-auto">
+      <div className="w-full h-full max-h-[80vh] overflow-x-auto">
+        <DataGrid
+          rows={data}
+          columns={enhancedColumns}
+          pageSize={5}
+          rowsPerPageOptions={[5, 10, 20]}
+          disableSelectionOnClick
+          getRowId={(row) => row.id} // Use a unique identifier from your data
+          className="bg-white"
+        />
+      </div>
     </div>
   );
-  
-  
-  
 };
 
 export default GenericTable;

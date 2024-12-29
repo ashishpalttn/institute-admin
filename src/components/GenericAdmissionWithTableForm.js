@@ -16,7 +16,7 @@ const GenericAdmissionWithTableComponent = ({
         formFields={formFields}
         handleSave={handleSave}
       />
-      <div className=" mt-2 h-[48%]  ">
+      <div className=" mt-2 h-[48%] overflow-auto  ">
         <GenericTable
           columns={formFields}
           data={tableData}

@@ -96,8 +96,8 @@ export default StudentsList;
 
 
 const columns = [
-  { fieldName: 'id', fieldKey: 'id', hideEdit:true },
-  { fieldName: 'SN.', fieldKey: 'sn', hideEdit:true },
+  // { fieldName: 'id', fieldKey: 'id', hideEdit:true },
+  // { fieldName: 'SN.', fieldKey: 'sn', hideEdit:true },
   { fieldName: 'Student Name', fieldKey: 'studentName' },
   { fieldName: 'Class', fieldKey: 'studentClass' },
   { fieldName: 'Mobile No', fieldKey: 'mobileNo' },

@@ -7,15 +7,15 @@ const CreateEditDialog = ({ open, onClose, columns, data, onSubmit }) => {
     // Initialize form data with the current student data or empty values for new records
     if (data) {
       const initialData = columns.reduce((acc, col) => {
-        acc[col.field] = data[col.field] || '';
+        acc[col.fieldKey] = data[col.fieldKey] || '';
         return acc;
       }, {});
       setFormData(initialData);
     }
   }, [data, columns]);
 
-  const handleChange = (e, field) => {
-    setFormData({ ...formData, [field]: e.target.value });
+  const handleChange = (e, fieldKey) => {
+    setFormData({ ...formData, [fieldKey]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -34,12 +34,12 @@ const CreateEditDialog = ({ open, onClose, columns, data, onSubmit }) => {
         <form onSubmit={handleSubmit}>
           <div className='px-6 max-h-[65vh]  overflow-y-auto'>
           {columns.filter(column=>!column.hideEdit).map((col) => (
-            <div key={col.field} className="mb-4">
-              <label className="block text-gray-700 mb-1">{col.header}</label>
+            <div key={col.fieldKey} className="mb-4">
+              <label className="block text-gray-700 mb-1">{col.fieldName}</label>
               <input
                 type="text"
-                value={formData[col.field]}
-                onChange={(e) => handleChange(e, col.field)}
+                value={formData[col.fieldKey]}
+                onChange={(e) => handleChange(e, col.fieldKey)}
                 className="w-full p-2 border rounded"
               />
             </div>

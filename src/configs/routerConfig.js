@@ -17,11 +17,11 @@ const RouteConfig = () => {
             <Routes>
                 <Route path="/" element={<DashboardPage/>}>
                     <Route index = {true} element = {<DashboardData/>}/>
-                    <Route path="/dashboard/overview" element={<DashboardData/>} />
-                    <Route path="/events/register" element={<EventRegisterPage/>} />
-                    <Route path="/live-events" element={< ProtectedRoute><LiveEvents /></ProtectedRoute> } />
-                    <Route path="/particepants" element={<ParticepantsList />} />
-                    <Route path='/students/admissions' element={<StudentAdmissionPage/>}/>
+                    <Route path="/dashboard/overview" element={<ProtectedRoute><DashboardData/></ProtectedRoute>} />
+                    <Route path="/events/register" element={<ProtectedRoute><EventRegisterPage/></ProtectedRoute>} />
+                    <Route path="/live-events" element={<ProtectedRoute><LiveEvents /></ProtectedRoute> } />
+                    <Route path="/particepants" element={<ProtectedRoute><ParticepantsList /></ProtectedRoute>} />
+                    <Route path='/students/admissions' element={<ProtectedRoute><StudentAdmissionPage/></ProtectedRoute>}/>
                 </Route>
                 <Route path="/dashboard" element={<DashboardPage />} />
                 
