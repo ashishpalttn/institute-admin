@@ -12,7 +12,7 @@ function RootPage() {
       </div>
       <div className="w-[83%] flex-1 flex flex-col sm:ml-0 md:ml-64 lg:ml-0 lg:ml-0 lg:ml-0">
         <Header />
-        <main className=" bg-white-700 p-4  h-[90%]">
+        <main className="overflow-auto bg-white-700 p-4 max-h-[90%]">
         <Outlet/>
         </main>
       </div>
