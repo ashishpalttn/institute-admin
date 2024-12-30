@@ -4,7 +4,7 @@ import Header from '../../components/common/Header';
 import TestPage from '../TestPage';
 import { Outlet } from 'react-router-dom';
 
-function App() {
+function RootPage() {
   return (
     <div className="flex h-full">
         <div className='hidden md:flex lg:flex max-h-full flex'>
@@ -20,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default RootPage;

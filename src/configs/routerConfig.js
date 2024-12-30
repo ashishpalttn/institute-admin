@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import DashboardPage from '../pages/Dashboard/DashboardPage';
+import DashboardPage from '../pages/Dashboard/RootPage';
 import  EventRegisterPage  from '../pages/EventRegisterPage';
 import DashboardData from '../pages/Dashboard';
 import LiveEvents from '../pages/LiveEvents';
