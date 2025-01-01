@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const CreateEditDialog = ({ open, onClose, columns, data, onSubmit }) => {
+const GenericCreateEditDialog = ({ open, onClose, columns, data, onSubmit }) => {
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
@@ -64,4 +64,4 @@ const CreateEditDialog = ({ open, onClose, columns, data, onSubmit }) => {
   );
 };
 
-export default CreateEditDialog;
+export default GenericCreateEditDialog;

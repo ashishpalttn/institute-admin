@@ -3,7 +3,7 @@ import axios from 'axios';
 import GenericTable from '../components/GenericTable';
 import { useLocation } from 'react-router-dom';
 import { ExportStudents } from '../components/ExportStudents';
-import CreateEditDialog from '../components/CreateEditDialog';
+import GenericCreateEditDialog from '../components/GenericCreateEditDialog';
 
 const BASE_URL = `${process.env.REACT_APP_API_URL}/event-registration`
 
@@ -81,7 +81,7 @@ const StudentsList = () => {
         onEdit={handleEdit} 
         onDelete={handleDelete} 
         />
-        <CreateEditDialog
+        <GenericCreateEditDialog
         open={editDialogOpen}
         onClose={() => setEditDialogOpen(false)}
         columns={columns}
