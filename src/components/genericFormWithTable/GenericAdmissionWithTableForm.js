@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import GenericTable from "./GenericTable";
-import GenericForm from "./GenericForm.js";
+import GenericTable2 from "./GenericTable2.js";
+import GenericForm from "../GenericForm.js";
 
 const GenericAdmissionWithTableComponent = ({
   formTitle,
   formFields,
   handleSave,
   handleDelete,
+  handleEditSubmit,
   tableData,
 }) => {
   return (
@@ -17,10 +18,10 @@ const GenericAdmissionWithTableComponent = ({
         handleSave={handleSave}
       />
       <div className=" mt-2 h-[48%] overflow-auto  ">
-        <GenericTable
+        <GenericTable2
           columns={formFields}
-          data={tableData}
-          // onEdit={handleEdit}
+          rows={tableData}
+          handleEditSubmit={handleEditSubmit}
           onDelete={handleDelete}
         />
       </div>

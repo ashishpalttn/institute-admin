@@ -1,7 +1,8 @@
 import React, { useEffect} from "react";
-import GenericAdmissionWithTableComponent from '../components/GenericAdmissionWithTableForm';
-import { getStudents, saveStudent, deleteStudent, selectStudent } from "../store/studentSlice";
+import GenericAdmissionWithTableComponent from '../components/genericFormWithTable/GenericAdmissionWithTableForm';
+import { getStudents,editStudent ,saveStudent, deleteStudent, selectStudent } from "../store/studentSlice";
 import { useDispatch, useSelector } from "react-redux";
+import GenericTable from "../components/GenericTable";
 
 const StudentAdmissionPage = () => {
   const dispatch = useDispatch()
@@ -19,26 +20,43 @@ const StudentAdmissionPage = () => {
     await dispatch(deleteStudent(id));
     dispatch(getStudents())
   }
-
+const handleEditSubmit = async (student)=>{
+  await dispatch(editStudent(student))
+  dispatch(getStudents())
+}
   return (
-    <div className="bg-blue-100 h-[100%]">
-     <GenericAdmissionWithTableComponent
+    <div className="bg-blue-100 h-full">
+     {/* <GenericAdmissionWithTableComponent
        formTitle={formTitle}
        formFields={formFields}
        tableData={students}
        handleSave = {handleSave}
        handleDelete= {handleDelete}
-    /> 
+       handleEditSubmit={handleEditSubmit} 
+    />  */}
+  
+     <GenericTable
+           tableTitle={formTitle}
+            columns={formFields}
+            rows={students}
+            handleSave = {handleSave}
+            onDelete= {handleDelete}
+            handleEditSubmit={handleEditSubmit} 
+            button={{
+             label:"Create Student"
+            }}
+     />
     </div>
-
+ 
   );
 };
 
 export default StudentAdmissionPage;
 
 
-const formTitle = "Student Registration"
+const formTitle = "Students"
 const formFields = [
+  { fieldName: "ID", fieldKey: "id" },
   { fieldName: "Student Name", fieldKey: "studentName" },
   { fieldName: "Father Name", fieldKey: "fatherName" },
   { fieldName: "Mother Name", fieldKey: "motherName" },

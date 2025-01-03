@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
+import GenericCreateEditDialog from "../components/GenericCreateEditDialog";
+import GenericButton from "./GenericButton";
 
-const GenericTable = ({ columns, data, onEdit, onDelete }) => {
+const GenericTable = ({
+  button,
+  tableTitle,
+  columns,
+  rows,
+  handleEditSubmit,
+  onDelete,
+}) => {
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editData, setEditData] = useState([]);
+
   const enhancedColumns = [
     {
       field: "serialNo",
       headerName: "SN",
       sortable: false,
       minWidth: 80,
-      flex: 0.2, // Adjust as needed to balance space
+      flex: 0.2,
       renderCell: (params) => {
-        const serialNumber = data.indexOf(params.row)+1
-        return <div>{serialNumber}</div> 
-      }
-      ,
+        const serialNumber = rows.indexOf(params.row) + 1;
+        return <div>{serialNumber}</div>;
+      },
     },
     ...columns.map((col) => ({
       field: col.fieldKey,
@@ -49,17 +60,51 @@ const GenericTable = ({ columns, data, onEdit, onDelete }) => {
     },
   ];
 
+  const onEdit = (row) => {
+    setEditData(row);
+    setEditDialogOpen(true);
+    console.log("Edit row:", row);
+  };
+
   return (
-    <div className="w-full h-full max-h-[80vh] overflow-auto">
-      <div className="w-full h-full max-h-[80vh] overflow-x-auto">
+    <div className="w-full h-[calc(100vh-92px)] bg-gray-100">
+      <div className="h-[calc(100vh-140px)] w-full">
+        <div className="flex justify-center justify-between p-2 ">
+          <h1 className="text-2xl font-bold ">{tableTitle}</h1>
+          <GenericButton
+            label={button?.label}
+            onClick={() => setEditDialogOpen(true)}
+          />
+        </div>
         <DataGrid
-          rows={data}
+          rows={rows}
           columns={enhancedColumns}
           pageSize={5}
           rowsPerPageOptions={[5, 10, 20]}
           disableSelectionOnClick
-          getRowId={(row) => row.id} // Use a unique identifier from your data
+          getRowId={(row) => row.id}
           className="bg-white"
+          sx={{
+            "& .MuiDataGrid-footerContainer": {
+              position: "sticky",
+              bottom: 0,
+              backgroundColor: "#fff",
+              zIndex: 1,
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              position: "sticky",
+              top: 0,
+              backgroundColor: "#fff",
+              zIndex: 1,
+            },
+          }}
+        />
+        <GenericCreateEditDialog
+          open={editDialogOpen}
+          onClose={() => setEditDialogOpen(false)}
+          columns={columns}
+          row={editData}
+          onSubmit={handleEditSubmit}
         />
       </div>
     </div>

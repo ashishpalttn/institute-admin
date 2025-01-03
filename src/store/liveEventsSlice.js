@@ -23,6 +23,16 @@ export const fetchEvents = createAsyncThunk('events/fetchEvents', async (_, { re
     }
   });
 
+  export const createEvent = createAsyncThunk('event/create', async (formData)=>{
+    try{
+      const response = await axios.post(`${BASE_URL}`,formData,{withCredentials:true})
+      return response.data
+    }catch(e){
+      console.log("Error during create event", e)
+    }
+     
+  })
+
 const liveEventSlice = createSlice({
     name : 'liveEvents',
     initialState: {
@@ -54,6 +64,7 @@ const liveEventSlice = createSlice({
               .addCase(deleteEvent.rejected, (state, action) => {
                 state.error = action.payload;
               });
+
     },
 
 })

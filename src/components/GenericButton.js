@@ -2,7 +2,7 @@ import React from 'react';
 
 const GenericButton = ({
   onClick,
-  label,
+  label= 'default btn',
   disabled = false,
   className = '',
   variant = 'primary', // default variant
@@ -22,7 +22,7 @@ const GenericButton = ({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      className={`px-6 py-2 items-center flex font-bold rounded-3xl ${buttonVariants[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`px-6 py-2 items-center h-10 flex font-bold rounded-3xl ${buttonVariants[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       {label}
     </button>

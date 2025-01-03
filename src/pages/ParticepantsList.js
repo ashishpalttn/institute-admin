@@ -3,14 +3,13 @@ import axios from 'axios';
 import GenericTable from '../components/GenericTable';
 import { useLocation } from 'react-router-dom';
 import { ExportStudents } from '../components/ExportStudents';
-import GenericCreateEditDialog from '../components/GenericCreateEditDialog';
 
 const BASE_URL = `${process.env.REACT_APP_API_URL}/event-registration`
 
 const StudentsList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editDialogOpen, setEditDialogOpen] = useState(false);  // State to handle dialog visibility
+  // State to handle dialog visibility
   const [selectedStudent, setSelectedStudent] = useState(null); 
   const location = useLocation();
 
@@ -33,16 +32,12 @@ const StudentsList = () => {
     fetchData();
   }, []);
 
-  const handleEdit = (student) => {
-      setSelectedStudent(student);  // Set selected student for editing
-      setEditDialogOpen(true);      // Open dialog
-    console.log('Edit student:', student);
-  };
 
-  const handleSubmit = async (updatedData) => {
+
+  const handleEditSubmit = async (updatedData) => {
     try {
       // Send updated data to the server (implement PUT API here)
-      await axios.put(`${BASE_URL}/registrations/${updatedData.id}`, updatedData);
+      await axios.put(`${BASE_URL}/registrations/${updatedData.id}`, updatedData, {withCredentials:true});
       // Update the student list in the frontend
       setStudents((prevStudents) =>
         prevStudents.map((student) =>
@@ -67,27 +62,20 @@ const StudentsList = () => {
   if (loading) {
     return <p className="text-center p-4">Data loading...</p>;
   }
+    {/* <ExportStudents className="" eventName={eventName}/> */}
 
   return (
-    <div className="container  mx-auto px-4 py-6">
-      <div className='flex justify-between'>
-      <h1 className="text-2xl font-bold mb-4 ">Registered Students</h1>
-      {/* <p>Export</p> */}
-      <ExportStudents className="" eventName={eventName}/>
-      </div>
-      <GenericTable 
+    <div>
+      <GenericTable
+        tableTitle="Registered Students"
         columns={columns} 
-        data={students} 
-        onEdit={handleEdit} 
-        onDelete={handleDelete} 
+        rows={students} 
+        handleEditSubmit={handleEditSubmit} 
+        onDelete={handleDelete}
+        button= {{
+          label: "Export Participents",
+        }}
         />
-        <GenericCreateEditDialog
-        open={editDialogOpen}
-        onClose={() => setEditDialogOpen(false)}
-        columns={columns}
-        data={selectedStudent}
-        onSubmit={handleSubmit}
-      />
     </div>
   );
 };
@@ -96,8 +84,7 @@ export default StudentsList;
 
 
 const columns = [
-  // { fieldName: 'id', fieldKey: 'id', hideEdit:true },
-  // { fieldName: 'SN.', fieldKey: 'sn', hideEdit:true },
+  { fieldName: 'id', fieldKey: 'id', hideEdit:true },
   { fieldName: 'Student Name', fieldKey: 'studentName' },
   { fieldName: 'Class', fieldKey: 'studentClass' },
   { fieldName: 'Mobile No', fieldKey: 'mobileNo' },
