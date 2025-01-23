@@ -56,8 +56,8 @@ export default StudentAdmissionPage;
 
 const formTitle = "Students"
 const formFields = [
-  { fieldName: "ID", fieldKey: "id" },
-  { fieldName: "Student Name", fieldKey: "studentName" },
+  { fieldName: "Roll No.", fieldKey: "id", width:10,},
+  { fieldName: "Student Name", fieldKey: "studentName", width:20},
   { fieldName: "Father Name", fieldKey: "fatherName" },
   { fieldName: "Mother Name", fieldKey: "motherName" },
   { fieldName: "Address", fieldKey: "address" },

@@ -21,7 +21,7 @@ const GenericTable = ({
       field: "serialNo",
       headerName: "SN",
       sortable: false,
-      minWidth: 80,
+      width: 60,
       flex: 0.2,
       renderCell: (params) => {
         const serialNumber = rows.indexOf(params.row) + 1;
@@ -33,7 +33,7 @@ const GenericTable = ({
       headerName: col.fieldName,
       flex: 1,
       sortable: true,
-      minWidth: 150,
+      minWidth: 104,
     })),
     {
       field: "actions",
