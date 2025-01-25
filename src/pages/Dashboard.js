@@ -1,34 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {selectWeather, getWeather} from '../../src/store/weatherSlice'
 import StudentSearch from '../components/StudentSearch';
 
 const DashboardData = () => {
-    const count = useSelector((state) => state.counter.value);
+    const weather = useSelector(selectWeather);
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(getWeather())
+    },[])
     return (
         <div className="p-12">
-            <h2 className="text-2xl font-semibold mb-4">Dashboard</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-white shadow rounded-lg p-4">
-                    <h3 className="text-lg font-medium">Total Students</h3>
-                    <p className="text-2xl font-semibold">1,200</p>
-                </div>
-                <div className="bg-white shadow rounded-lg p-4">
-                    <h3 className="text-lg font-medium">Active Events</h3>
-                    <p className="text-2xl font-semibold">8</p>
-                </div>
-                <div className="bg-white shadow rounded-lg p-4">
-                    <h3 className="text-lg font-medium">Teachers</h3>
-                    <p className="text-2xl font-semibold">75</p>
-                </div>
-                <div className="bg-white shadow rounded-lg p-4">
-                    <h3 className="text-lg font-medium">New Admissions</h3>
-                    <p className="text-2xl font-semibold">340</p>
-                </div>
-                <div>
-                    <StudentSearch/>
-                </div>
-            </div>
+            <h2 className="text-2xl font-semibold mb-4">Weather App</h2>
+            <p>{}</p>
+        
         </div>
     );
 };

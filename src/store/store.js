@@ -4,6 +4,7 @@ import counterReduce from './counterSlice';
 import liveEventsReducer from './liveEventsSlice';
 import studentSlice from './studentSlice';
 import testSlice from './testSlice';
+import weatherSlice from './weatherSlice'
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     counter: counterReduce,
     liveEvent: liveEventsReducer,
     student: studentSlice,
-    testData: testSlice
+    testData: testSlice,
+    weather: weatherSlice
   },
 });
 
